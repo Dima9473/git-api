@@ -1,11 +1,11 @@
 import './App.css';
 import { Routes, Route, } from 'react-router-dom'
-import GitRepos from './components/GitRepos/GitRepos';
+import UserInfo from './components/Git/UserInfo';
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<GitRepos />} />
+      <Route path="/" element={<UserInfo />} />
     </Routes>
   );
 }

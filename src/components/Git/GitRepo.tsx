@@ -1,7 +1,7 @@
 import { FC } from "react"
-import { GitReposProp } from "./GitRepos.types"
+import { GitRepoProps } from "./GitRepos.types"
 
-const GitRepo: FC<GitReposProp> = (props) => {
+const GitRepo: FC<GitRepoProps> = (props) => {
     const { repo } = props
     return (
         <li>
