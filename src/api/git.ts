@@ -1,3 +1,6 @@
+import axios from "axios";
+
+
 const defaulFetchtOptions: RequestInit = {
     method: 'GET'
 }
@@ -14,4 +17,15 @@ export const getGitData = async (userName: string) => {
     const data = await fetchData(url)
 
     return data
+}
+
+export const getReposAsync = async (userName: string) => {
+    const promise = await axios.get(`http://localhost:3000/repos/${userName}`);
+    const status = promise.status;
+    if (status === 200) {
+        const data = promise.data;
+        return data
+    }
+
+    return null
 }
