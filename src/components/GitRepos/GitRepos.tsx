@@ -6,6 +6,7 @@ import GitRepo from "./GitRepo"
 const GitRepos: FC = () => {
     const [value, setValue] = useState<string>('dima9473')
     const [repos, setRepos] = useState<any[]>([])
+    const [company, setCompany] = useState<any[]>([])
     const [isRequestSended, setIsRequestSended] = useState<boolean>(false)
 
     const handleInputChange = useCallback((value: FormEvent<HTMLInputElement>) => {
@@ -16,7 +17,12 @@ const GitRepos: FC = () => {
         event.preventDefault();
 
         const data = await getReposAsync(value)
-        setRepos(data)
+        if (!data) {
+            return
+        }
+
+        setRepos(data.repos)
+        setCompany(data.company)
         setIsRequestSended(true)
     }, [value])
 
@@ -29,6 +35,7 @@ const GitRepos: FC = () => {
             </form>
             {isRequestSended && !repos?.length && <p><strong>No account exists with username:</strong> {value}</p>}
             {isRequestSended && repos?.length && <p><strong>Number of Public Repos:</strong> {repos.length}</p>}
+            {isRequestSended && company && <p><strong>Company name:</strong> {company}</p>}
             <ul>
                 {repos?.map((repo, index) => <GitRepo key={index} repo={repo} />)}
             </ul>
