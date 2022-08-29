@@ -1,6 +1,6 @@
 import { FC, FormEvent, useCallback, useState } from "react"
 
-import { getReposAsync } from "../../api/git"
+import { getReposAsync, postData } from "../../api/git"
 import GitRepos from "./GitRepos"
 
 const UserInfo: FC = () => {
@@ -26,6 +26,10 @@ const UserInfo: FC = () => {
         setCompany(data.company)
     }, [value])
 
+    const handlePost = useCallback(async () => {
+        await postData()
+    }, [])
+
     return (
         <div>
             <h3>GitHub Repos</h3>
@@ -33,6 +37,7 @@ const UserInfo: FC = () => {
                 <input className='gitName' type="text" placeholder="GitHub Username" value={value} onChange={handleInputChange} />
                 <input type="submit" value="Submit" />
             </form>
+            <button onClick={handlePost}>send post</button>
             {isRequestSended && !repos?.length && <p><strong>No account exists with username:</strong> {value}</p>}
             {isRequestSended && !!repos?.length && <p><strong>Number of Public Repos:</strong> {repos.length}</p>}
             {isRequestSended && company && <p><strong>Company name:</strong> {company}</p>}

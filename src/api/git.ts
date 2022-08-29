@@ -12,3 +12,9 @@ export const getReposAsync = async (userName: string) => {
         return null
     }
 }
+
+export const postData = async () => {
+    await axios.post('http://localhost:3000/project', {
+        projectName: 'TestKoaPostProject',
+    })
+}
